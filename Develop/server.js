@@ -12,39 +12,39 @@ app.use(express.json());
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/index.html'));
+    res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
 app.get('/notes', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/notes.html'));
+    res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
 app.get('/api/notes', (req, res) => {
-  res.json(notes);
+    res.json(notes);
 });
 
 app.post('/api/notes', (req, res) => {
-  req.body.id = uuidv4();
-  const newNote = req.body;
-  notes.push(newNote);
-  fs.writeFileSync(
-    path.join(__dirname, './db/db.json'),
-    JSON.stringify({ notes }, null, 2)
+    req.body.id = uuidv4();
+    const newNote = req.body;
+    notes.push(newNote);
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({ notes }, null, 2)
     );
-  res.json(notes);
+    res.json(notes);
 })
 
 app.delete('/api/notes/:id', (req, res) => {
-  const id= req. params.id;
-  const noteIndex = notes.findIndex(n => n.id == id);
-  notes.splice(noteIndex, 1);
-  fs.writeFileSync(
-    path.join(__dirname, './db/db.json'),
-    JSON.stringify({ notes }, null, 2)
-  );
-  res.json(notes);
-})
+    const id = req.params.id;
+    const noteIndex = notes.findIndex(n => n.id == id);
+    notes.splice(noteIndex, 1);
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({ notes }, null, 2)
+    );
+    res.json(notes);
+});
 
 app.listen(PORT, () => {
-  console.log(`App listening on PORT ${PORT}`);
+    console.log(`App listening on PORT ${PORT}`);
 });
