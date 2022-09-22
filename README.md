@@ -18,4 +18,6 @@ MIT License
 
 ## Deployed
 
-Link: 
+Link: https://note-taker-jlee.herokuapp.com/
+
+![](./Develop/Screenshot%202022-09-21%20223136.png)
